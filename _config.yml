@@ -9,13 +9,14 @@
 title: "KihwanKim Blog"
 email: clack2933@gmail.com
 description: "Kihwan Kim git blog"
-baseurl: "/jekyll-help-center-theme"
+baseurl: ""
 url: "https://kihwankim.github.io"
 twitter_username: ""
 github_username:  "kihwankim"
 color_theme:  "#0081ff"
 color_text:  "#fff"
 language:  "en"
+remote_theme : "kihwankim/kihwankim.github.io"
 
 # Build settings
 markdown: kramdown
