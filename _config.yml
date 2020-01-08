@@ -1,29 +1,44 @@
-# Welcome to Jekyll!
-#
-# This config file is meant for settings that affect your whole blog, values
-# which you are expected to set up once and rarely need to edit after that.
-# For technical reasons, this file is *NOT* reloaded automatically when you use
-# 'jekyll serve'. If you change this file, please restart the server process.
+# Site/SEO settings
+email: 
+permalink: /:year/:month/:day/:title/
+google_analytics: 
 
-# Site settings
 title: "KihwanKim Blog"
-email: clack2933@gmail.com
 description: "Kihwan Kim git blog"
-baseurl: ""
 url: "https://kihwankim.github.io"
-twitter_username: ""
-github_username:  "kihwankim"
-color_theme:  "#0081ff"
-color_text:  "#fff"
-language:  "en"
-remote_theme : "kihwankim/kihwankim.github.io"
+baseurl: ""
+twitter_username: 
+default_img: 
+
+# Profile settings
+name: 
+profile_img: 
+profile: 
+social:
+  github: 
 
 # Build settings
 markdown: kramdown
-permalink: /:title/
-gems: [jekyll-paginate]
-paginate: 5
+plugins:
+  - jekyll-paginate
+  - jekyll-sitemap
+  - octopress-autoprefixer
+compress_html:
+  clippings: all
+  comments: all
+  startings: [html, head, body]
+exclude:
+  - _screenshots
+  - .DS_Store
+  - Gemfile
+  - Gemfile.lock
+  - LICENSE.txt
+  - README.md
 
-# Plugins
-plugins_dir:
-  - jekyll-admin
+# Pagination
+paginate: 5
+paginate_path: "/blog/page-:num"
+
+# Sass
+sass:
+  style: compressed
