@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>KihwanKim Blog</title>
+    <description>Kihwan Kim git blog</description>
+    <link>http://localhost:4000/</link>
+    <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Mon, 27 Apr 2020 17:44:49 +0900</pubDate>
+    <lastBuildDate>Mon, 27 Apr 2020 17:44:49 +0900</lastBuildDate>
+    <generator>Jekyll v3.8.6</generator>
+    
+      <item>
+        <title>CNN</title>
+        <description>&lt;h2&gt;Convolutional Neural Networks&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Convolution&lt;/li&gt;
+  &lt;li&gt;Pooling&lt;/li&gt;
+  &lt;li&gt;Fully Connected&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3&gt;Convolution&lt;/h3&gt;
+&lt;figure&gt;
+  &lt;img src=&quot;../../../../../side/img/purdue/airplane.jpg&quot; alt=&quot;airplane&quot; /&gt;
+&lt;/figure&gt;
+
+&lt;h3&gt;R-CNN&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Detection System&lt;/li&gt;
+  &lt;li&gt;Using Region Proposal&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt;YOLO&lt;/h2&gt;
+&lt;h3&gt;The YOLO Decection System&lt;/h3&gt;
+&lt;ol&gt;
+  &lt;li&gt;resizes the input image to 448 x 448&lt;/li&gt;
+  &lt;li&gt;runs a single convolutional network on the image&lt;/li&gt;
+  &lt;li&gt;thresholds the resulting detections by the model's confidence&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3&gt;The detection way of YOLO&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;이미지 pixel로부터 bounding box자료와 분류 과정을 single regression problem 으로 재정의&lt;/li&gt;
+  &lt;li&gt;이미지를 한번만 보고 Object가 무엇이고 어디 있는지를 알 수 있음&lt;/li&gt;
+  &lt;li&gt;image에서 작동하는 Single Convolution Network를 실행하여 물체의 bounding box와 bounding box안의 Objet가 무엇인지 동시에 예측&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;YOLO tade off&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;분류 능력은 다른 분류시스템보다 떨어짐&lt;/li&gt;
+  &lt;li&gt;빠르게 object 식별하나, 작은 물체 검출이 힘듦 &lt;/li&gt;
+  &lt;li&gt;실험을 통하여 해당 내용과 관련된 trade off를 확인해야함&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;Unified Detection&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Component들을 single convolution network에 통합&lt;/li&gt;
+  &lt;li&gt;이미지로 얻은 feature들을 예측하고 탐지하는데 사용&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Sat, 11 Jan 2020 00:00:00 +0900</pubDate>
+        <link>http://localhost:4000/2020/01/11/perdue_project_cnn/</link>
+        <guid isPermaLink="true">http://localhost:4000/2020/01/11/perdue_project_cnn/</guid>
+        
+        
+        <category>Purdue-Project</category>
+        
+      </item>
+    
+      <item>
+        <title>1st day in Purdue Univ</title>
+        <description>&lt;h2&gt;First day in Purdue Univ&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Airplane&lt;/li&gt;
+  &lt;li&gt;Arrive&lt;/li&gt;
+  &lt;li&gt;My New House In U.S.A&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;Airplane&lt;/h3&gt;
+&lt;figure&gt;
+  &lt;img src=&quot;../../../../../side/img/purdue/airplane.jpg&quot; alt=&quot;airplane&quot; /&gt;
+&lt;/figure&gt;
+
+&lt;h3&gt;Arrive&lt;/h3&gt;
+&lt;p&gt;This is Chicago ORD Airport&lt;/p&gt;
+
+&lt;figure&gt;
+  &lt;img src=&quot;../../../../../side/img/purdue/arrive.jpg&quot; alt=&quot;arrive&quot; /&gt;
+&lt;/figure&gt;
+</description>
+        <pubDate>Wed, 01 Jan 2020 00:00:00 +0900</pubDate>
+        <link>http://localhost:4000/2020/01/01/perdue_1st/</link>
+        <guid isPermaLink="true">http://localhost:4000/2020/01/01/perdue_1st/</guid>
+        
+        
+        <category>Purdue-Life</category>
+        
+      </item>
+    
+  </channel>
+</rss>
