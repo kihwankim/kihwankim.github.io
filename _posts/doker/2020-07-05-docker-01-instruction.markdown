@@ -8,7 +8,7 @@ description:
 image: "../../../../../side/img/docker/docker.png"
 image-sm: "../../../../../side/img/docker/docker.png"
 ---
-<h2>First day in Purdue Univ</h2>
+<h2>Docker study 01</h2>
 
 <ul>
   <li>Docker</li>
