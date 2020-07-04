@@ -37,6 +37,11 @@ image-sm: "../../../../../side/img/docker/docker.png"
 		<li>docker run -d -p 5001:5000 kkh/hello-world:0.0.1.RELEASE : 해당 이미지를 back ground에서 실행하게 해준다.</li>
 		<li>docker container ls : 현재 실행 중인 docker container들의 정보를 보여준다.</li>
 		<li>docker container stop 1acd06667b0f : 1acd06667b0f 의 container id 를 가지는 container을 실행을 멈춘다.</li>
-		<li></li>
+		<li>docker container ls -a : 모든 실행 제거 log들을 보여준다</li>
+		<li>docker pull mysql : download mysql container</li>
+		<li>docker search mysql : mysql의 다운받을 수 있는 모든 container images들이 존재 한다.</li>
+		<li>docker image history kkh/hello-world:0.0.1.RELEASE : 해당 image에 대한 layer정보를 보여준다.</li>
+		<li>docker image inspect 100229ba687e : image에 대한 더 디테일한 정보를 볼 수 있다.</li>
+		<li>docker image remove mysql : mysql image를 삭제하는 명령어</li>
 	</ul>
 </figure>
