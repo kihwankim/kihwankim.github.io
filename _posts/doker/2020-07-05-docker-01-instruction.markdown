@@ -43,5 +43,13 @@ image-sm: "../../../../../side/img/docker/docker.png"
 		<li>docker image history kkh/hello-world:0.0.1.RELEASE : 해당 image에 대한 layer정보를 보여준다.</li>
 		<li>docker image inspect 100229ba687e : image에 대한 더 디테일한 정보를 볼 수 있다.</li>
 		<li>docker image remove mysql : mysql image를 삭제하는 명령어</li>
+		<li>docker container run -d -p 5000:5000 kkh/hello-world:0.0.1.RELEASE : 해당 이미지를 출력해준다.</li>
+		<li>docker container stop CONTAINER_ID : CONTAINER_ID에 해당하는 container를 중단한다 -> container중지한다.</li>
+        <li>docker container kill CONTAINER_ID : CONTAINER_ID에 해당하는 container를 중단한다 -> 즉시 바로 container 중단</li>
+        <li>docker system df : docker가 디스크사용하는 내용을 보여준다</li>
+        <li>docker system events : 이 명령어 실행 이후의 docker의 event log를 전부 출력</li>
+        <li>docker system prune -a : 현재 실행중인 image 빼고 전부 제거</li>
+        <li>docker run -d -p 5001:5000 -m 512m kkh/hello-world:0.0.1.RELEASE : 해당 이미지를 실행할 때 최대 512MB밖에 사용할 수 없음</li>
+        <li>docker run -d -p 5001:5000 -m 512m --cpu-quota=5000 kkh/hello-world:0.0.1.RELEASE : (quota : 100,000 정도 존재)50,000정도의 CPU를 할당 할 수 있음 -> CPU의 50%만 사용</li>
 	</ul>
 </figure>
