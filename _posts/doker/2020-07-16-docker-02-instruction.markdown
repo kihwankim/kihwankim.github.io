@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "docker instruction"
+title: "Dockerfile"
 date: 2020-07-16
 categories:
   - "Docker"
