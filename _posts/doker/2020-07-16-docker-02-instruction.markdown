@@ -11,6 +11,7 @@ image-sm: "../../../../../side/img/docker/docker.png"
 <h2>Docker study 02</h2>
 
 <h3>Dockerfile</h3>
+<figure>
 	<ul>
 		<li>FROM : 어떤 이미지를 기반으로 현재 이미지를 생성할지 결정 한다. 생략불가, 맨앞에 와야함, 기존 layer에서 부터 시작할 수 있는 명령어들 -> FROM <image> FROM <image>:<tag> FROM <image>@<digest></li>
 		<li>MAINTAINER <작성자 정보> : 이밎를 생성한 사람의 정보이며, 형식은 자유이다.</li>
@@ -19,6 +20,7 @@ image-sm: "../../../../../side/img/docker/docker.png"
 		<li>ENTRYPOINT : 기본적으로 CMD와 기능과 동일하다 하지만 docker run명령에서 실행 파일의 하나의 매개 변수로 받아지게 된다. --entrypoint 옵션을 사요할 경우 Dockerfile에서 설정한 ENTRYPOINT는 무시한다.</li>
 		<li>EXPOSE : </li>
 	</ul>
+</figure>
 
 <h3>Instruction</h3>
 
@@ -30,6 +32,23 @@ image-sm: "../../../../../side/img/docker/docker.png"
 				<li>0.0.2.RELEASE : tag</li>
 			</ul>
 		</li>
-		<li>docker run -p 5000:5000 -d kkh/hello-world-python:0.0.2.RELEASE : build된 docker image를 container로 실행</li>>
+		<li>docker run -p 5000:5000 -d kkh/hello-world-python:0.0.2.RELEASE : build된 docker image를 container로 실행</li>
+	</ul>
+</figure>
+
+<h3>deplyment at docker hub</h3>
+<figure>
+	<ul>
+		<li>make repo</li>
+		<img src="../../../../../side/img/docker/docker-hub-for-making-repo.png" alt="repo"/>
+		<li>login in local terminal : docker id 사용</li>
+		<img src="../../../../../side/img/docker/docker-login-in-terminal.png" alt="docker login"/>
+		<li>
+			docker push kkh/hellow-world-python:0.0.2.RELEASE : docker hub에 공유 가능
+			<ul>
+				<li>kkh : docker id</li>
+				<li>hellow-world-python : repo name</li>
+			</ul>
+		</li>
 	</ul>
 </figure>
