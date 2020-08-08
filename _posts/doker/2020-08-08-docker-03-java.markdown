@@ -1,0 +1,41 @@
+---
+layout: post
+title: "Dockerfile"
+date: 2020-07-16
+categories:
+  - "Docker"
+description:
+image: "../../../../../side/img/docker/docker.png"
+image-sm: "../../../../../side/img/docker/docker.png"
+---
+<h2>Docker java maven project</h2>
+
+<h3>First Step : make jar file</h3>
+<figure>
+  	<img src="../../../../../side/img/docker/first-step.png" alt="first step"/>
+	<ul>
+		<li>maven project : Build and Run</li>
+	</ul>
+</figure>
+
+<h3>Second Step : run the jar file</h3>
+<figure>
+  	<img src="../../../../../side/img/docker/second-step.png" alt="second step"/>
+	<ul>
+		<li>copy to jar file to image</li>
+		<li>from=build : 위에서 만든 (as build) build 파일을 가르킨다 그리고 build를 jarfile로 가져온다.</li>
+		<li>run the jar file using openjdk-8</li>
+	</ul>
+</figure>
+
+<h3>ENTRYPOINT와 CMD 차이점</h3>
+<figure>
+	<ul>
+		<li>ENTRYPOINT : 컨테이너 시작시 실행 명령에 대한 Defauilt 지정 해준다.</li>
+		<li>CMD : 컨테이너를 실행할때 인자 값을 주게 되면 Dockerfile에 지정된 CMD 값을 대신 하여 지정되게 된다. 따라서 docker image를 실행 시 바꿀 수 있다.</li>
+		<li>container가 수행될 때 변경되지 않을 실행 명령은 ENTRYPOINT로 정의하는게 좋다</li>
+		<li>메인 명령어가 실행시 default option인자 값은 CMD로 정의하는게 좋다.</li>
+		<li>추가로 ENTRYPOINT 와 CMD는 리스트 포맷 ( ["args1", "args2",...] )으로 정의해 주는게 좋다.</li>
+	</ul>
+</figure>
+
