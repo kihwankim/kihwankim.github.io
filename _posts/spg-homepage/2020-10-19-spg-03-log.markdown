@@ -1,0 +1,60 @@
+---
+layout: post
+title: "spg 회고록 003회차"
+date: 2020-10-18
+categories:
+  - "SPG-hompage"
+description:
+image: "../../../../../side/img/spg/spg_logo.jpg"
+image-sm: "../../../../../side/img/spg/spg_logo.jpg"
+---
+<h2>Spring Bean 과 Bean 등록</h2>
+<figure>
+	<h3>Bean</h3>
+	<ul>
+	    <li>Bean : Spring Container에 의해 만들어지는 자바의 객체를 말한다</li>
+	    <li>Bean life cycle
+	        <ul>
+	            <li>xml file/java 설정클래스/어노테이션에서 Bean 정의를 스캔</li>
+	            <li>Bean 인스턴스화</li>
+	            <li>프로퍼티 할당(필드 변수 값 설정) -> 의존성 주입</li>
+	            <li>Spring 인지 여부 검사
+	                <ul>
+	                    <li>BeanNameAware의 setBeanName() 호출 -> default는 class 이름의 소문자 형태로 설정</li>
+	                    <li>BeanClassLoaderAware 인터페이스 구현 시 setBeanClassLoader() 호출 -> 실제 Bean에 등록하는 클래스를 로드</li>
+	                    <li>ApplicationContextAware 인터페이스 구현 시 setApplicationContext() 호출 -> application context(Container와 mapping)</li>
+	                </ul>
+	            </li>
+	            <li>Bean 생명주기 Call Back(callback 함수- 다른 함수의 인자로서 이용되는 함수)
+	                <ul>
+	                    <li>@PostConstruct 어노테이션 적용메소드 호출</li>
+	                    <li>InitializingBean의 afterPropertiesSet 메소드 호출</li>
+	                    <li>커스텀 init method 호출</li>
+	                    <li>Bean 객체 사용</li>
+	                    <li>종료 시점
+	                        <ul>
+	                            <li>@PreDestory 를 정의한 method 호출</li>
+	                            <li>destroy 메소드 호출 - DisposableBean 인터페이스</li>
+	                            <li>Custom Destroy 메소드 호출</li>
+	                        </ul>
+	                    </li>
+	                </ul>
+	            </li>
+	        </ul>
+	    </li>
+	</ul>
+	<h3>삽질</h3>
+    <img src="../../../../../side/img/spg/03/bug.png" alt="bug" style="width: 30%"/>
+    <ul>
+        <li>Package 분업을 위해서 내부 적으로 admin, login, board로 package를 나누고 그 내부에 Controller, Repository, Service pakcage를 또 생성하였다.</li>
+        <li>문제접 : controller, repository, service package내부에 객체가 어노테이션을 붙여도 Bean으로 등록이 안돼었음</li>
+        <li>해결 방법과 이유
+            <ul>
+                <li>해결 방법 : config package에 AppConfig 라는 @Configuration Bean객체를 만들고 해당 @ComponentScan으로 admin, login, board 등의 package를 넣어 둔다</li>
+                <img src="../../../../../side/img/spg/03/solve.png" alt="solve" style="width: 30%"/>
+                <li>이유 : Application 에 main문이 있는데 거기에 @SpringBootApplication 이라는 어노테이션이 존재 여기 내부에 @ComponentScan이 있다 그러므로 main 문이 있는 class 와 동일한 package선상에 있는 class들만 Bean으로 등록하게 된다. 
+                하지만 login.controller pakcage내부에는 scan에 범위 외에 있기 때문에 Bean으로 등록할 수 없었다.</li>
+            </ul>
+        </li>
+    </ul>
+</figure>
