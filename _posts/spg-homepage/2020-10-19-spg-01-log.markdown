@@ -5,14 +5,14 @@ date: 2020-10-18
 categories:
   - "SPG-hompage"
 description:
-image: "../../../../../side/img/spg/spg_logo.png"
-image-sm: "../../../../../side/img/spg/spg_logo.png"
+image: "../../../../../side/img/spg/spg_logo.jpg"
+image-sm: "../../../../../side/img/spg/spg_logo.jpg"
 ---
 <h2>첫 프로젝트 설계</h2>
 
 <h3>change</h3>
 <figure>
-  	<img src="../../../../../side/img/spg/spg_logo.png" alt="first step"/>
+  	<img src="../../../../../side/img/spg/spg_logo.jpg" alt="first step"/>
 	<ul>
 		<li>목적 : 동아리 홍보를 위해 웹페이지 제작 시작</li>
 		<li>팀원</li>
