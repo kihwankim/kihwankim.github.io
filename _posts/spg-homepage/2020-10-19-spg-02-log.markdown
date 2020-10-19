@@ -1,0 +1,44 @@
+---
+layout: post
+title: "spg 회고록 002회차"
+date: 2020-10-18
+categories:
+  - "SPG-hompage"
+description:
+image: "../../../../../side/img/spg/spg_logo.jpg"
+image-sm: "../../../../../side/img/spg/spg_logo.jpg"
+---
+<h2>Spring boot 선택 이유</h2>
+<figure>
+  	<img src="../../../../../side/img/spg/spg-springlogo.png" alt="spring" style="width: 30%"/>
+  	<img src="../../../../../side/img/spg/spg-springboot-logo.png" alt="spring boot" style="width: 30%"/>
+	<h3>Spring VS Spring Boot</h3>
+	<ul>
+	    <li>Spring : 개발자들의 겨울이 끝났다는 뜻을 가지고 있다</li>
+	    <li>Spring boot : 단독적인 상용화 수준의 스프링 기반 애플리케이션을 만들 수 있게 해주는는 것</li>
+	    <li>Spring 과 Spring Boot 차이점
+            <ul>
+                <li>Dependency(편리한 의존성 관리 & 자동 권장 버전 관리) : Spring boot가 권장 버전을 자동으로 잡아준다.
+                    <ul>
+                        <li>starter 붙어있는 dependency를 사용하면 이와 연결된 다른 라이브러리를 자동으로 다운 받아준다.</li>
+                    </ul>
+                </li>   
+                <li>configuration
+                    <ul>
+                        <li>spring에서는 config를 일일이 다 설정해줘야한다 하지만 spring boot는 config를 application properties에서 설정해주면 해준다.</li>
+                        <li>최근 yml file을 더 많이 사용하는 추세임 -> 중복 제거 => 하지만 현재 우리 팀원중에서 대부분 스프링에 익숙하지 않기 때문에 maven 프로젝트 와 application.property프로젝트를 선택</li>
+                    </ul> 
+                </li>
+                <li>내장 서버
+                    <ul>
+                        <li>spring boot가 내장 서버가 있기 때문에 외부 tomcat을 호출하는 시간이 절약됨</li>
+                        <li>tomcat을 빼고 다른 서버를 쉽게 추가할 수 있다.</li>
+                        <li>jar file로 바로 배포가능 -> 내장 서버가 존재하기 때문에</li>
+                    </ul>
+                </li>
+            </ul>
+	    </li>
+	</ul>
+	<h3>결론</h3>
+	<p>내장 톰켓이 있고, dependecy 처리도 좀 더 편리한 Spring boot 를 사용하게 되었습니다.</p>
+</figure>
