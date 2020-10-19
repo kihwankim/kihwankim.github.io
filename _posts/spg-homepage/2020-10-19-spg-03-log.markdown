@@ -46,8 +46,8 @@ image-sm: "../../../../../side/img/spg/spg_logo.jpg"
 	<h3>삽질</h3>
     <img src="../../../../../side/img/spg/03/bug.png" alt="bug" style="width: 30%"/>
     <ul>
-        <li>Package 분업을 위해서 내부 적으로 admin, login, board로 package를 나누고 그 내부에 Controller, Repository, Service pakcage를 또 생성하였다.</li>
-        <li>문제접 : controller, repository, service package내부에 객체가 어노테이션을 붙여도 Bean으로 등록이 안돼었음</li>
+        <li>Package 분업을 위해서 내부 적으로 admin, login, board로 package를 나누고 그 내부에 Controller, Repository, Service package를 또 생성하였다.</li>
+        <li>문제점 : controller, repository, service package내부에 객체가 어노테이션을 붙여도 Bean으로 등록이 안돼었음</li>
         <li>해결 방법과 이유
             <ul>
                 <li>해결 방법 : config package에 AppConfig 라는 @Configuration Bean객체를 만들고 해당 @ComponentScan으로 admin, login, board 등의 package를 넣어 둔다</li>
