@@ -1,0 +1,31 @@
+---
+layout: post
+title: "spg 회고록 001회차"
+date: 2020-10-18
+categories:
+  - "SPG-hompage"
+description:
+image: "../../../../../side/img/spg/spg_logo.png"
+image-sm: "../../../../../side/img/spg/spg_logo.png"
+---
+<h2>첫 프로젝트 설계</h2>
+
+<h3>change</h3>
+<figure>
+  	<img src="../../../../../side/img/spg/spg_logo.png" alt="first step"/>
+	<ul>
+		<li>목적 : 동아리 홍보를 위해 웹페이지 제작 시작</li>
+		<li>팀원</li>
+		    <h5>프론트 엔드</h5>
+            <ul>
+                <li>권오범</li>
+                <li>신동환</li>
+                <li>오경택</li>
+            </ul>
+                <h5>백엔드</h5>
+            <ul>
+                <li>김기환</li>
+                <li>이지형</li>
+            </ul>
+	</ul>
+</figure>
