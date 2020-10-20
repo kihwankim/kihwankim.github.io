@@ -1,0 +1,86 @@
+---
+layout: post
+title: "spg 회고록 004회차"
+date: 2020-10-20
+categories:
+  - "SPG-hompage"
+description:
+image: "../../../../../side/img/spg/spg_logo.jpg"
+image-sm: "../../../../../side/img/spg/spg_logo.jpg"
+---
+<h2>Servlet과 Context</h2>
+<figure>
+	<h3>Servlet</h3>
+	<ul>
+	    <li>정의 : 클라이언트가 웹 애플리케이션에 요청이 왔을 때 처리결과를 클라이언트에 전송하는 기술</li>
+	    <li>특징
+	        <ul>
+	            <li>클라이언트의 요청에 대해 동적으로 작동하는 웹 애플리케이션 컴포넌트이다</li>
+	            <li>html을 사용하여 요청에 응답한다</li>
+	            <li>Java Thread를 이용하여 동작한다 -> Dispatcher Servlet이 singleton 으로 형성되어있으며 모든 요청은 fork가 아닌 Thread로 접근하면 초기 요청 비용을 줄인다.(나중에 설명)</li>
+	            <li>http 요청이 왔을때 원래 web.xml에 해당 uri에 mapping된 servlet이 처리 해 준다 -> 단점 : 많은 xml 파일이 생기면 수정시 불편한 사항이 많아짐</li>
+	            <li>servlet 객체 정의 함수
+	                <ul>
+	                    <li>init : servlet instance 생성(초기화) 해주는 메서드</li>
+	                    <li>service : 실제 기능을 수행하는 곳
+                            <ul>
+                                <li>http method에 따라 doGet, doPost, doPut, doDelete 메소드 호출 -> 과거 시간표 만들어 주는 프로램 제작 당시에는 Spring Servlet이 아닌 기본 Servlet이었기 때문에 doGet,doPost만 기본으로 사용하였음</li>
+                                <li>위와 같은 곳이 개발자들이 구현한 model 부분이다 - Spring Boot에 Controller 함수로 생각하면 편하다</li>  
+                            </ul>
+	                    </li>
+	                    <li>destory : servlet instance가 사라지는 곳 : container가 종료되는 시점에 호출, servlet 로드/언로드시에 사용</li>
+	                </ul>
+	            </li>
+	            <li>각 메서드는 Servlet Container(Tomcat)이 호출 해준다</li>
+	            <li>Dispatcher Servlet
+    `               <ul>
+                        <li>web.xml에 모든 servlet request가 dispatcher servlet으로 가도록 유도 -> 그리고 처리 해준다</li>
+                    	<li>servlet을 등록하면 그 servlet이 사용하는 설정 파일이 자동으로 등록</li>
+                    	<li>/WEB-INF/servlet이름-servlet.xml(spring 레거시에서 사용해 본 경험있음 -> 읽기 힘들다는 생각만 들었음 -> spring boot 사랑해요) 추가적으로 설정 파일 등록가능</li>
+                    	<li>이름-servlet.xml 파일에 handler mapping을 등록 해줌
+                            <ul>
+                                <li>BeanNameHandlerMapping : bean 이름에 맞춰서 url을 mapping(bean : employee -> EmployeeController로 이동</li>
+                                <img src="../../../../../side/img/spg/04/04-beanNameHandler.png" alt="bug" style="width: 60%"/>
+                                <li>DefaultAnnotationHandlerMapping : @Controller 어노테이션 붙이면 해당 url로 이동 => 현재 우리가 사용한 기술</li>
+                    	    </ul>
+                    	</li>
+                    </ul>
+                 </li>
+                 <li>과거 : Spring web MVC가 없을 때는 각 요청에 따라 Servlet파일 필요</li>
+                 <li>현재 : Spring web MVC가 있기 때문에 Dispatcher Servlet이 다 처리 해줌 -> 넘나 편리한것~</li>
+	        </ul>
+	    </li>
+	</ul>
+	<h3>Container</h3>
+	<ul>
+	    <li>정의 : 주입을 이용히여 객체를 관리하는 역할을 수행</li>
+	    <li>역할
+	        <ul>
+	            <li>1개 이상의 Bean 객체, 관계, 사용, 생명주기등을 관리 해준다.</li>
+	            <li>객체 생성, 연결, 설정, + 전체 생명주기 관리</li>
+	        </ul>
+	    </li>
+	    <li>종류
+	        <ul>
+	            <li>BeanFactory : 빈 객체를 생성 및 관리 -> Factory pattern을 사용</li>
+	            <li>Ex : BeanFactory factory = new XmlBeanFactory(new FileInputStream(“bean.xml”));</li>
+	            <li>MyBeanClass bean = (MyBeanClass) facotry.getBean(“myBeanClass”);</li>
+	            <li>Application Context : BeanFactory 에서 아래로 상속 받아서 기능을 추가</li>
+	        </ul>
+	    </li>
+	    <li>생성 과정
+	        <ul>
+	            <li>톰캣이 실행되면 ContextLoaderListner가 contextLoader()메서드 실행 -> contextConfigLocation으로 applicationContext.xml 파일 읽어옴</li>
+	            <li>Root Applicaiton Context 생성</li>
+	            <li>설정파일을 스캐닝 하여 객체 생성(Bean -> Repository, Service)</li>
+	            <li>DispatcherServlet은 Spring-servlet.xml 파일을 읽어서 어노테이션 scaning 하여 Web Application Context 컨테이너에 저장 -> Root Context에있는 객체를 가져와서 DI 가능</li>
+	            <li>요청 처리</li>
+	            <li>key point : context는 하나의 container이며 해당 container는 bean을 관리해준다 그리고 root, web application container로 나눠서 관리 -> web application context 는 root context의 Bean에 접근 가능(Autowired 사용)</li>
+	        </ul>
+	    </li>
+	</ul>
+	<h3>이거 공부할 때 삽질</h3>
+	<p>Bean과 Container Servlet 각각의 이해는 잘했었다 하지만 연결 고리가 너무 어색했었다 -> (Spring 실행 -> Linstener (root context) -> Filter -> servlet 순으로 생성) 이것을 몰랐기 때문에 연결 고리가 형성 되지 않아 많이 힘들었다. -> 과거를 회상하다 보니 이런 구조를 가졌기 때문에 
+	filter에서 Repository Bean 접근 가능하다는게 말이 돼기 시작했었다 -> security 나중에 회고록 참고</p>
+	<img src="../../../../../side/img/spg/04/04-container.png" alt="bug" style="width: 60%"/>
+</figure>
