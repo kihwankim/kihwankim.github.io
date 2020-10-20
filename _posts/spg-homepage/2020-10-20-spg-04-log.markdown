@@ -63,8 +63,8 @@ image-sm: "../../../../../side/img/spg/spg_logo.jpg"
 	    <li>종류
 	        <ul>
 	            <li>BeanFactory : 빈 객체를 생성 및 관리 -> Factory pattern을 사용</li>
-	            <li>Ex : BeanFactory factory = new XmlBeanFactory(new FileInputStream(“bean.xml”));</li>
-	            <li>MyBeanClass bean = (MyBeanClass) facotry.getBean(“myBeanClass”);</li>
+	            <li>Ex : BeanFactory factory = new XmlBeanFactory(new FileInputStream(bean.xml))</li>
+	            <li>MyBeanClass bean = (MyBeanClass) facotry.getBean(myBeanClass)</li>
 	            <li>Application Context : BeanFactory 에서 아래로 상속 받아서 기능을 추가</li>
 	        </ul>
 	    </li>
