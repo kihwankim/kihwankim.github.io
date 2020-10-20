@@ -15,7 +15,7 @@ image-sm: "../../../../../side/img/spg/spg_logo.jpg"
   	<img src="../../../../../side/img/spg/spg_logo.jpg" alt="first step"/>
 	<ul>
 		<li>목적 : 동아리 홍보를 위해 웹페이지 제작 시작</li>
-		<li>팀원</li>
+		<li>팀원
 		    <h5>프론트 엔드</h5>
             <ul>
                 <li>권오범</li>
@@ -27,5 +27,7 @@ image-sm: "../../../../../side/img/spg/spg_logo.jpg"
                 <li>김기환</li>
                 <li>이지형</li>
             </ul>
+        </li>
 	</ul>
+	<p>해당 내용은 저가 코드 작업할 때 작성했던 log 문서와 프로젝트 종료후 추가적인 조사 작업이 더해 지게 되며, 프로젝트 수정에 기여하기 위해 작성하게 되었습니다.</p>
 </figure>
