@@ -1,0 +1,25 @@
+---
+layout: post
+title: "spg 회고록 005회차"
+date: 2020-10-21
+categories:
+  - "SPG-hompage"
+description:
+image: "../../../../../side/img/spg/spg_logo.jpg"
+image-sm: "../../../../../side/img/spg/spg_logo.jpg"
+---
+<h2>Role에 Enum type 사용</h2>
+<figure>
+	<h3>내 의견</h3>
+	<ul>
+	    <li>이번 회고록은 솔직히 자신은 없다 그렇지만 만약 더 좋은 아이디어 있다면 clack2933@gmail.com으로 메일 부탁드리고 내가 잘 못 한 점이 있다면 바로 메일 보내 주세요</li>
+	    <li>Role은 Spring Security 권한을 의미한다 이 권한으로 홈페이지 접근 제어를 할 수 있다.</li>
+	    <li>Spring 에서 사용하는 Role : UserDetails 라는 interface를 상속받은 객체를 Spring Security가 응용한다, 그리고 여기서 Role은 Collection에서 GrantedAuthority 라는 객체 형태로 저장된다.</li>
+	    <li>해당 객체를 DB에 넣게 될 때 내부 String 값을 저장해야하므로 어쨌든 1번더 작업이 필요하다 생각하였고, Enum형태는 Sigleton이 보장되어있기 때문에 사용하기 편리하다고 생각하였다.</li>
+	    <li>Enum을 String 형태로 변환하는 @Enumerated(EnumType.STRING)또 있기때문에 더 사용하기 편리할 뿐만아니라 외부에서 임의의 string 값이 들어간다면 해당 계정에 대해 role을 못찾게 되어 문제가 생긴다. -> 추가작업하여 외부 공격을 미리 log 파일에 등록하여 기록도 가능하다고 판단</li>
+	    <li>그러므로 Enum 형태가 더 효율적이라고 판단하여 사용하게 되었다.</li>
+	    <li>위의 의견에 대해 구글에 검색하였지만 Enum에 대한 공부외에 더 많은 답은 찾지 못했다.</li>
+	    <li>완벽하지는 않지만 내가 생각한 이유로 enum을 RoleName으로 등록하여 사용했다.</li>
+	</ul>
+	<img src="../../../../../side/img/spg/05/05-role.png" alt="role" style="width: 60%"/>
+</figure>
