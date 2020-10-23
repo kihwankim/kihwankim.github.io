@@ -1,0 +1,29 @@
+---
+layout: post
+title: "spg 회고록 007회차"
+date: 2020-10-23
+categories:
+  - "SPG-hompage"
+description:
+image: "../../../../../side/img/spg/spg_logo.jpg"
+image-sm: "../../../../../side/img/spg/spg_logo.jpg"
+---
+<h2>JPA N+1 문제</h2>
+<figure>
+    <h3>JPA N+1 문제</h3>
+	<ul>
+	    <li>정의 : 내가 어떤 것을 DB로부터 조회할 때 하나 하나 조회 하는 쿼리를 만들어서 DB에 접근을 하여 join 연산 없이 N+1번의 접근 하는 현상</li>
+	    <img src="../../../../../side/img/spg/07/07-jpa-n+1-pro01.PNG" alt="request" style="width: 60%"/>
+    	<img src="../../../../../side/img/spg/07/07-jpa-n+1-pro02.PNG" alt="request" style="width: 60%"/>
+	    <li>해결 방법 : </li>
+	    <img src="../../../../../side/img/spg/07/07-jpa-n+1-sol-code01.png" alt="request" style="width: 60%"/>
+	    <img src="../../../../../side/img/spg/07/07-jpa-n+1-sol-code02.png" alt="request" style="width: 60%"/>
+	    <li>위와 같이 NameEntityGraph를 해준다면 Left outer join으로 바꾸게 된다</li>
+	    <li>JPA Repository 또한 바꿔야한다.</li>
+	    <li>결과</li>
+	    <img src="../../../../../side/img/spg/07/07-jpa-n+1-sol.PNG" alt="request" style="width: 60%"/>
+	</ul>
+	<h3>간단한 후기</h3>
+	<p>JPA영역의 내부 로직에 대해서는 아직 공부가 필요하다고 느낀다. 그리고 현재 쿼리문을 줄이는 방법에 대해 더 연구가 필요하다 지금 Comment(댓글)과 File(연결 파일)에 대한 추가 작업이 요구되고 
+	공부가 완료된다면 테스트 진행 후 서버에 새로 최신 개정판을 올릴예정이다.</p>
+</figure>
