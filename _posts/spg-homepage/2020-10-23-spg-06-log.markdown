@@ -1,0 +1,43 @@
+---
+layout: post
+title: "spg 회고록 006회차"
+date: 2020-10-23
+categories:
+  - "SPG-hompage"
+description:
+image: "../../../../../side/img/spg/spg_logo.jpg"
+image-sm: "../../../../../side/img/spg/spg_logo.jpg"
+---
+<h2>Requset Response 전체 흐름</h2>
+<figure>
+	<img src="../../../../../side/img/spg/06/06-requset-reponse.PNG" alt="request" style="width: 60%"/>
+	<ul>
+	    <li>Tomcat(Servlet Container에 가깝다)이 web.xml 파일이나 ComponentScan 범위의 파일을 읽어서 servlet 시작
+	        <ul>
+	            <li>Servlet Container : servlet life cycle 관리해주는 container</li>
+	        </ul>
+	    </li>
+	    <li>ContexLoadListener는 root-context.xml을 로드(Root Context : Root Container 구동)
+	        <ul>
+	            <li>Root Container가 먼저 로드 되어있어야지 Filter와 Interceptor에서 Dispatcher Servlet이 없을 때 Repository 및 Service의 함수를 가져다 쓸 수 있음</li>
+	        </ul>
+	    </li>
+	    <li>Application Context 생성 -> Application Container 생성하여 controller와 같은 Bean life cycle 관리</li>
+	    <li>Client 요청</li>
+	    <li>Dispatcher Servlet(Front Controller)이 생성 되서 모든 요청을 어떻게 처리할지 결정</li>
+	    <li>HandlerMapping으로 가셔 해당 요청에 Mapping한 controller를 연결</li>
+	    <li>HandlerAdapter으로 HandlerMapping에서 찾은 Controller의 메서드 호출 -> ModelAndView 형태로 변경
+	        <ul>
+	            <li>model : Controller가 처리해준 결과</li>
+	            <li>view : 결과를 담는 page</li>
+	        </ul>
+	    </li>
+	    <li>HandlerAdapter가 view 를 String type으로 넘겨줌</li>
+	    <li>ViewResolver가 해당 view String 값에 맞는 view파일에 model을 넣어서 client에게 반환</li>
+	</ul>
+	<h3>이해하기 힘들었던 부분</h3>
+	<p>RootContext와 ApplicationContext를 구분하기 힘들었다 왜냐하면 Reponsitory와 Service는 Root Context이기 때문에 어디에서나 접근가능하다 하지만  
+	Root Context 에서 Application Context 객체를 접근하기 못한다는 것에 대해 의문이 들었었다.
+	하지만 Security 작업 수행과정에서 Filter에 token 검증하는 코드를 넣은 경험있다.(과거 다른 프로젝트) 그 떄 DB에 접근하기 위해 Repository
+	Service의 메서드를 호출하여 사용한 경험이 있다. 이때 만약 RootContext가 먼저 생성 돼지 않았다면 Service 객체 메서드를 호출할 수 없으며 NPE가 떳을 것이다.</p>
+</figure>
