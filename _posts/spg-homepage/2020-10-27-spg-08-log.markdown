@@ -49,7 +49,7 @@ image-sm: "../../../../../side/img/spg/spg_logo.jpg"
             <ul>
                 <li>Config : 코드 여역에서 작성하는 부분 -> Root element로 설정(@Configuration이 있음)</li>
                 <li>defenders : parameter 값을 변경할 때 사용할 defender 인스턴스 집합</li>
-                <li>defender : 파라 미터 값을 변경할 때 사용하는 인스턴스 ex) < 을 &ls 으로 변경 시켜주는 것들</li>
+                <li>defender : 파라 미터 값을 변경할 때 사용하는 인스턴스 ex) > 을 &gt 으로 변경 시켜주는 것들</li>
                 <li>defender 종류
                     <ul>
                         <li>XssPreventer : HTML로 인식될만한 요소를 완전 제거 >을 &gt 로 변경</li>
@@ -60,9 +60,9 @@ image-sm: "../../../../../side/img/spg/spg_logo.jpg"
                                 <li>태그의 자식 부모 여부를 따지지 않고 그냥 존재 여부만 판단</li>
                                 <li>포함 관계 여부를 판단하지 않기 때문에 성능상으로 더 좋음</li>
                                 <li>ex 코드 : </li>
-                                <img src="../../../../../side/img/spg/08/08-sax-way.PNG" alt="request" style="width: 60%"/>
                             </ul>
                         </li>
+                        <img src="../../../../../side/img/spg/08/08-sax-way.PNG" alt="request" style="width: 60%"/>
                         <li>mail 서비스, 메세지 보드 서비스는 tag 정보를 그대로 사용해도됨 -> 실제 메시지 보드 내부에서 script문장이 실행 되지 않는 다면 굳이 바꾸지 않아도 됨</li>
                     </ul>
                 </li>
