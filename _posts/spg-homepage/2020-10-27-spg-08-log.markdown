@@ -53,11 +53,14 @@ image-sm: "../../../../../side/img/spg/spg_logo.jpg"
                 <li>defender 종류
                     <ul>
                         <li>XssPreventer : HTML로 인식될만한 요소를 완전 제거 >을 &gt 로 변경</li>
+                        <img src="../../../../../side/img/spg/08/08-prevent-way.PNG" alt="request" style="width: 60%"/>
                         <li>XssSaxFilter(XssFilter의 개성된 형태) : XSS 공격이 가능한 HTML 요소를 신뢰할 수 있는 코드로 변환, 삭제하는 기능을 제공, 공격이 가능하지 않은 HTML 요소는 허용
                             <ul>
                                 <li>닫는 태그만 있음 검사하지 않는다.</li>
                                 <li>태그의 자식 부모 여부를 따지지 않고 그냥 존재 여부만 판단</li>
                                 <li>포함 관계 여부를 판단하지 않기 때문에 성능상으로 더 좋음</li>
+                                <li>ex 코드 : </li>
+                                <img src="../../../../../side/img/spg/08/08-sax-way.PNG" alt="request" style="width: 60%"/>
                             </ul>
                         </li>
                         <li>mail 서비스, 메세지 보드 서비스는 tag 정보를 그대로 사용해도됨 -> 실제 메시지 보드 내부에서 script문장이 실행 되지 않는 다면 굳이 바꾸지 않아도 됨</li>
