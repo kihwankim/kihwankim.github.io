@@ -1,0 +1,33 @@
+---
+layout: post
+title: "spg 회고록 008회차"
+date: 2020-10-27
+categories:
+  - "SPG-hompage"
+description:
+image: "../../../../../side/img/spg/spg_logo.jpg"
+image-sm: "../../../../../side/img/spg/spg_logo.jpg"
+---
+<h2>XSS 공격</h2>
+<figure>
+    <h3>XSS 공격 종류</h3>
+	<ul>
+	    <li>정의 : 특정 한 Script를 삽입하여 사용자 쿠키 및 Session과 같은 정보를 탈취 하여 이득을 취하려고 하는 행위</li>
+	    <li>Reflected XSS
+	        <ul>
+	            <li>정의 : 공격자가 미리 취약한 web page를 탐색 후 해당 web page에 대한 스크립트가 포함된 url을 사용자에 메일/메신저 등으로 보내어 사용자가 그 url을 실행 시키게 된다면 (Script 코드가) 삽입된 요청을 취약 서버에 전송 
+	            -> 이 때 스크립트코드가 삽입된 web page가 받아지기 때문에 cookie 및 session등을 틸취 할 수 있음</li>
+	            <li>순서 : script 코드 삽입한 url 을 사용자에게 보냄 -> 사용자 url 실행 -> script 가 포함된 web page 받아옴 -> web page에서 script 문장 실행</li>
+	        </ul>
+	    </li>
+	    <li>Stored XSS
+	        <ul>
+	            <li>정의 : 웹 게시판에 스크립트를 미리 삽입해 두고, 사용자가 해당 web page를 다운 받음 그 해당 script가 실행 되는 방식을 취하는 공격 기법</li>
+	        </ul>
+	    </li>
+	    <img src="../../../../../side/img/spg/07/07-jpa-n+1-sol.PNG" alt="request" style="width: 60%"/>
+	</ul>
+	<h3>간단한 후기</h3>
+	<p>JPA영역의 내부 로직에 대해서는 아직 공부가 필요하다고 느낀다. 그리고 현재 쿼리문을 줄이는 방법에 대해 더 연구가 필요하다 지금 Comment(댓글)과 File(연결 파일)에 대한 추가 작업이 요구되고 
+	공부가 완료된다면 테스트 진행 후 서버에 새로 최신 개정판을 올릴예정이다.</p>
+</figure>
