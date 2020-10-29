@@ -1,0 +1,62 @@
+---
+layout: post
+title: "JPA 공부 001회차"
+date: 2020-10-29
+categories:
+  - "JPA"
+description:
+image: "../../../../../side/img/jpa/jpa.png"
+image-sm: "../../../../../side/img/jpa/jpa.png"
+---
+<h2>JPA</h2>
+<figure>
+	<h3>JDBC API의 문제점과 SQL의 문제점</h3>
+	<ul>
+	    <li>문제점 1 : 만약 crud 코드를 작성할 때 Conn -> STMT -> ResultSet 코드 반복이 많다</li>
+	    <li>문제점 2 : 요구사항 증가로 하나의 filed 값이 추가 -> 모든 sql문 수정이 필요함 -> 아니면 추가된 column에 대해 null 값 저장, 연관 객체는 더 까다로움 
+	    -> SQL에 의존적인 개발을 피하기 어렵다</li>
+	    <li>문제점 3 : 모든 것이 SQL에 의존적 -> Entity 를 신뢰 할 수 없다 -> SQL문을 하나씩 실행해서 결과를 봐야함 -> 계층 분할이 아님</li>
+	    <li>패러다임 불일치 : 객체와 다릴 데이터베이스는 추상화, 상속, 다형성 같은 개념이 없기 때문에 둘의 기능 표현 방법이 다르다.</li>
+	</ul>	
+	<h3>JPA로 문제 해결</h3>
+    <ul>
+        <li>sql문을 JPA가 제공하는 interface 사용한다 -> JPA CRUD API 간단히 제공됨 (jpa.persist(member) -> insert sql 실행)</li>
+        <li>jpa 는 수정 메소드 따로 제공 하지 않는다 하지만 만약 find 해서 가져온 값을 set 함수로 변경하면 transaction이 끝나기 전에 update 함수를 호출해줌</li>
+        <li>패러다임 불일치 해결
+            <ul>
+                <li>상속 
+                    <ul>
+                        <li>DB에 부모 자식 관계를 나타내야함 -> 이럴경우 반환 해줄 때 join 연산이 이뤄지게 되므로 많은 비용이 필요하다</li>
+                        <li>만약 객체를 저장 할 때 jpa 에 객체를 먼저 저장한다.(persist 메서드)</li>
+                        <li>find method 를 사용하면 자동으로 2개의 부모 자식 entity를 join해서 반환</li>
+                    </ul>
+                </li>
+                <li>연관 관계 : 객체는 참조를 사용해 참조에 접근해서 연관된 객체를 조회 -> 그래프 탐색하여서 참조한 것들을 조회 한다.</li>
+                <li>같은 row를 조회 하더라도 객체 입장에서 다른 객체로 인지한다. -> JPA가 같은 Transaction일 때 같은 객체를 보장한다.</li>
+            </ul>
+        </li>
+    </ul>
+    <h3>JPA란?</h3>
+    <ul>
+        <li>ORM : 객체를 관계형 데이터 베이스에 mapping 시키는 기술 -> 객체와 테이블 매핑 패러다임의 불일치 문제를 해결해준다.</li>
+        <img src="../../../../../side/img/jpa/01/01-jpa조회.png" alt="bug" style="width: 60%"/>
+        <li>개발자는 ORM에게 어떻게 mapping시킬지를 알려주기만 하면된다.</li>
+        <li>내부 ORM 프레임 워크 가여러개 있는데 주로 Hibernate가 주로 사용된다.(그외에 EclipseLink, DataNucleus가 있다.)</li>
+        <li>JPA는 ORM 기술에 대한 API표준 명세다.</li>
+    </ul>
+    <h3>JPA 사용 이유</h3>
+    <ul>
+        <li>생산성</li>
+        <li>유지보수</li>
+        <li>패러다임 불일치 해결
+            <ul>
+                <li>상속</li>
+                <li>연관관계</li>
+                <li>객체 그래프 탐색 -> 내부 참조 관계</li>
+                <li>같은 row에 대해 객체 비교</li>
+            </ul>
+        </li>
+        <li>성능 -> 성능 최적화 기능 제공 -> 같은 조회 쿼리를 두번 실행하지 않고 한번 실행 후 캐싱 되어있는 것을 가져온다.</li>
+        <li>데이터 접근 추상화와 벤더 독립성 -> 애플리케이션과 DB 사이에서 추상화 (ex) 페이징 처리 부분도 DB 마다 달라지는데 JPA로 고정해서 DB가 바껴도 자동으로 해준다.</li>
+    </ul>
+</figure>
