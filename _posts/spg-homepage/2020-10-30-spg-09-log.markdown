@@ -1,0 +1,68 @@
+---
+layout: post
+title: "spg 회고록 009회차"
+date: 2020-10-30
+categories:
+  - "SPG-hompage"
+description:
+image: "../../../../../side/img/spg/spg_logo.jpg"
+image-sm: "../../../../../side/img/spg/spg_logo.jpg"
+---
+<h2>Annotation</h2>
+<figure>
+    <h3>Annotation 정의 및 사용 이유</h3>
+	<ul>
+	    <li>정의 : 하나의 의미 있는 주석</li>
+	    <li>Annotation을 정의했줬을 때 여러 Annotation을 조합 가능</li>
+	    <li>만약 내가 Annotation을 정의한다면
+	        <ul>
+                <li>Retention : Annotation이 얼마나 살아있는지 결정
+                    <ul>
+                        <li>RetentionPolicy.CLASS : default 값, 컴파일 후 파일명.class 파일 까지 살아있다.
+                         그리고 만약 Run time에서 class 파일 load가 일어나게 된다면 사라진다.</li>
+                        <li>RetentionPolicy.SOURCE : 일반 주석처럼 사용 -> 컴파일 후 사라짐 -> 
+                        @Override 와 같이 컴파일 타임에서 오류를 감지</li>
+                        <li>RetentionPolicy.RUNTIME : 실행 중간에서도 유지 -> ex) GetMapping 실행 동안에서도 계속해서 사용할 수 있음</li>
+                    </ul>
+                </li>
+                <li>@Documented : 자바 문서화에 사용한 해당 애노테이션을 적을 때 사용</li>
+                <li>@Target : 해당 annotation을 어디에 사용할 수 있는지 결정 -> ElementType.METHOD -> 메서드에서만 사용 가능
+                , TYPE : 클래스등, ANNOTATION_TYPE : annotation타입에도 사용가능</li>
+	        </ul>
+	    </li>
+	</ul>
+    <h3>Annotation 재정의와 ConstraintValidator 사용</h3>
+    <ul>
+        <li>이 프로젝트에서 회원 가입이나 비밀번호 변경에서 패스워드와 패스워드 확인 2개의 
+        값이 일치하는지를 로직을 작성해야함 -> 하지만 노가다가 심하다 생각 -> ConstraintValidator를 알게됨</li>
+        <li>ConstraintValidator 의장점
+            <ul>
+                <li>직접 구현하지 않고도 다양한 validation을 진행 가능 -> 이미 있는 기능 사용</li>
+                <li>일관성있는 validation처리 방법 제공 -> 컨트롤러 진입 직전 interceptor에서 검증 
+                -> controller에서 내부 로직 처리해주는 많은 노가다를 안해도됨</li>
+                <li>일관성 있는 error 검증 -> 만약 validation으로 에러가 났다면, MethodArguementNotValidaException이 발생
+                이에러를 @ControllerAdvice를 이용해서 에러에 대한 처리 가능 -> 이부분은 공부가 필요함</li>
+            </ul>
+        </li>
+        <li>사용법
+            <ul>
+                <li>annotation을 생성 </li>
+                <img src="../../../../../side/img/spg/09/09-정의한annotation.png" alt="request" style="width: 80%"/>
+                <li>이 애노테이션을 validate할 때사용하기 때문에 validateBy에 ConstraintValidator을 상속 받은 클래스를 넣어준다.</li>
+                <li>여기서 2개의 인자를 받아야하므로 first(), second()를 넣어주고, message()로 에러 메세지를 위해 넣어준다 -> default로 값을 넣어줄 수 있음</li>
+                <li>ConstraintValidator를 재정의</li>                
+                <img src="../../../../../side/img/spg/09/09-validate-재정의.png" alt="request" style="width: 80%"/>
+                <li>상속받은 class -> FieldMatchValidator을 만들고 generic을 해당 애노테이션을 넣어준다.</li>
+                <li>2개의 String 값을 비교하는 로직을 설정해놓는다.</li>
+                <li>실패시 에러 메시지와 검증한 결과를 ConstraintValidatorContext에 넘겨준다. 그리고 ErrorReponse의 error[].field에 바인되어 사용한다.</li>
+                <li>실패 했기때문에 다음 validate 검사를 하는 추가적인 로직 수행을 막기 위해 disableDefaultConstraintViolation()을 추가 해줬다.</li>
+            </ul>
+        </li>
+    </ul>
+    <h3>삽질</h3>
+    <ul>
+        <li>애노테이션에 대해 이해를 잘 못하여서 RUNTIME을 Retention으로 설정하지 않았었다 구글 검색 하여서 왜 이렇게 되는지를 
+        검색하였고 결과적으로 위와 같은 정보를 얻게 되었다.</li>
+        <li>굳이 List 만들 이유가 없었는데 만든거 같아서 조금 아쉽다....</li>
+    </ul>
+</figure>
