@@ -1,0 +1,62 @@
+---
+layout: post
+title: "JPA 공부 002회차"
+date: 2020-10-30
+categories:
+  - "JPA"
+description:
+image: "../../../../../side/img/jpa/jpa.png"
+image-sm: "../../../../../side/img/jpa/jpa.png"
+---
+<h2>JPA 기본</h2>
+<figure>
+	<h3>객체 Mapping(javax.persistence)</h3>
+	<ul>
+	    <li>@Entity : 클래스를 Table과 Mapping한다고 JPA에게 알려준다. -> 이걸 사용하면 Entity class라고 부른다</li>
+	    <li>@Table : Entity 클래스에 mapping할 테이블 정보를 알려준다 -> name 속성을 사용해서 table 명을 지정 가능 -> 생략시 클래스 명이 table 명이된다.</li>
+	    <li>@Id : PK(기본키)에 Mapping</li>
+	    <li>@Column : 컬럼을 mapping한다, 여기서 name 속성으로 column명과 mapping 시킬 수 있다. -> 생략시 snake case로 변수명이 컬럼 명이 된다.</li>
+	    <li>JPA설정을 Persistence.xml 파일에서 설정 가능하다 -> Spring boot 에서는 application.properties에서 해당 작업을 대신할 수 있다.</li>
+	    <li>xml 파일에서 persistence-unit이라는 것으로 부터 시작 -> Entity Factory 에 persistence-unit이름을 넣으면 해당 설정 정보가 등록된 DB랑 연결된다.</li>
+	</ul>
+	<h3>방언(dialect)</h3>
+	<ul>
+	    <li>SQL문은 database에 따라 조금씩 다른 경우가 있다 -> 이것을 DB방언이라고 한다.</li>
+	    <li>ex) 데이터 타입 -> mysql : varchar, oracle : varchar2</li>
+	    <li>ex) 다른 함수명 -> mysql : substring(), oracle : substr()</li>
+	    <li>특정 DB에 종속된 함수를 많이 사용한다면 나중에 DB를 변경할 때 많은 문제가 생긴다 하지만 JPA는 이런 것을 Dialect 라는 것에서 관리 해주기 때문에 문제를 해결 할 수 있다.</li>
+	    <li>하지만 데이터베이스 방언은 JPA에서 표준화 되어있지는 않는다.</li>
+    	<img src="../../../../../side/img/jpa/02/02-entity-manager-factory.png" alt="entity manager factory" style="width: 80%"/>
+    	<li>위와 같이 코드는 3가지로 나뉜다.
+    	    <ul>
+    	        <li>엔티티 메니저 설정</li>
+    	        <li>트랜젝션 관리</li>
+    	        <li>비즈니스 로직</li>
+    	    </ul>
+    	</li>
+    	<img src="../../../../../side/img/jpa/02/02-set-entity-manager.png" alt="set entity manager" style="width: 80%"/>
+    	<li>Entity Manger Factory 생성 -> persistence.xml 을 읽어서 Entity Manger Factory 생성, 
+    	애플리케이션 처음 시작하면 하나 만들고 계속 공유한다. -> 애플리케이션 종료할 때 close() 한다</li>
+    	<li>JPA의 모든 기능은 Entity Manger가 제공한다. -> CRUD 기능 제공</li>
+    	<li>마지막에 무조건 em.close()를 해야한다.</li>
+    	<li>Entity Manager는 database 커넥션에 밀접한 관련이 있기 때문에 무조건 재상용 하면 안된다.</li>
+	</ul>
+	<h3>Jpa Transaction 관리</h3>
+	<ul>
+	    <li>JPA는 항상 트랜젝션 안에서 데이터를 변경한다.</li>
+	    <li>try 내부 : 로직사용 -> catch : rollback()사용</li>
+	    <li>persist()로 하나의 값을 저장한다</li>
+	    <li>만약 어떤 Entity 객체를 트랜젝션 내부에서 set 함수로 값을 변경한다면 자동으로 update함수를 구성하여서 DB에 반영한다 
+	    -> update함수는 JPA에 존재 하지 않음 트랜잭션 내부에서 자동으로 처리</li>
+	</ul>
+	<h3>JPQL</h3>
+	<ul>
+	    <li>Entity 정보가 아닌 Entity 객체를 대상으로 조회를 한다면 -> 모든 row를 가져와서 동일한 값을 가져와야한다.</li>
+	    <li>JPA는 위와 같은 문제를 JPQL(Java Persistence Query Language)이라는 쿼리 언어로 해결한다.</li>
+	    <li>JPQL은 select, from, where, group by, having, join등을 사용가능 하다.</li>
+	    <li>JPQL은 Enity객체 즉 내부 field 변수에 대해서 쿼리를 날린다.(ORM)</li>
+	    <li>SQL은 database 테이블 대상으로 쿼리를 날린다.(기본 mapper 같은거)</li>
+	    <li>JPQL은 DB table을 알지 못하고 Entity Table을 통해서만 query를 날린다.</li>
+	    <li>JPQL은 관례상 대무낮 소문자를 엄격히 구분 -> SQL은 구분하지 않음</li>
+	</ul>
+</figure>
