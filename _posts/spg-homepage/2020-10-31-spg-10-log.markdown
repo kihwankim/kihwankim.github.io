@@ -40,6 +40,46 @@ image-sm: "../../../../../side/img/spg/spg_logo.jpg"
 	            <li>method에 query를 mapping 해준다.</li>
 	        </ul>
 	    </li>
+	    <li>ORM(Object Relational Mapping)
+	        <ul>
+	            <li>정의 : 객체지향으로 구현되어있는 것을 RDBMS에 Mapping 시키기 위한 기술 -> SQL문에 의존적인 개발을 방지하기위해서 사용하게됨</li>
+	            <li>JPA : interface와 같다</li>
+	            <li>구현체
+	                <ul>
+	                    <li>Hibernate</li>
+	                    <li>EclipseLink</li>
+	                    <li>DataNucleus</li>
+	                </ul>
+	            </li>
+	            <img src="../../../../../side/img/spg/10/10-entity-lifecycle.png" alt="jpa life cycle" style="width: 90%"/>
+                <li>Entity 생명주기
+	                <ul>
+	                    <li>Eneity Manager : 새로운 data가 있다면 save 함수로 인해 persistence context에 올라가게되고 이러한 data를 관리해주는 역할을 담당</li>    
+	                    <li>Flush 과정에서 SQL문 생성 -> 최종적으로 Transaction이 끝나면 flush 하는 형태</li>    
+	                </ul>
+	            </li>
+	            <li>핵심 기술
+	                <ul>
+	                    <li>Lazy Loading : 필요한 때 해당 데이터를 query로 호출 -> 사용하지 않을 경우 불필요한 join연산 등을 방지(Proxy 패턴을 사용)</li>
+	                    <li>Dirty Checking : 바로 DB에 업데이트하지 않고 일단 메모리상에 처리한 결과를 저장 -> Transaction이 끝나면 그때 DB에 쿼리를 날려 저장 및 삭제를 한다.</li>
+	                    <li>Caching : 최근 자주 사용되는 데이터는 메모리에 계속 상주해 있도록 유도</li>
+	                </ul>
+	            </li>
+	            <li>Spring Data JPA : spring data 전형에서 만든 JPA
+	                <ul>
+	                    <li>Repository를 제안 : 한단계 더 추상화 된 형태 
+	                    -> Entity Manager를 자동으로 함수명에 맞게 mapping해준다.</li>
+	                </ul>
+	            </li>
+	        </ul>
+	    </li>
 	</ul>            
-            
+    <h3>반성 과 삽질</h3>
+    <ul>
+        <li>반성 : ORM을 사용했다 Spring Data JPA를 사용하면서 편리한 요소만 봤었다.</li>
+        <li>문제점 : JPA N + 1문제 발생 -> 전 회고록 참고</li>
+        <li>극복 과정에 있다 지금 현재 JPA관련 책을 사서 공부중이다 그리고 공부한 내용을 블로그에 올리고 있다.</li>
+        <li>@OneToMany인 경우 Mappedby와 같이 양방향과 일반 적인 단방향에 주의 해야한다. 이 것은 추 후에 JPA 카테고리에서 다루도록 하겠습니다.</li>
+        <li>JPA N+1극복을 위해 지금 현재 공부중이고 이것을 극복하지 못한다면 Mybatis나 Spring JDBC를 사용해야한다고 생각합니다.</li>
+    </ul>
 </figure>
