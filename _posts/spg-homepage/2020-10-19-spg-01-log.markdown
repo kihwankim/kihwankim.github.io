@@ -30,6 +30,6 @@ image-sm: "../../../../../side/img/spg/spg_logo.jpg"
         	</li>
 	</ul>
 	<p>해당 내용은 저가 코드 작업할 때 작성했던 log 문서와 프로젝트 종료후 추가적인 조사 작업이 더해 지게 되며, 프로젝트 수정에 기여하기 위해 작성하게 되었습니다. 만약 저의 로그 블로그를 읽고 잘못된 점이있다면 저의 메일로 알려주세요 clack2933@gmail.com</p>
-	<p>홈페이지 URL : http://www.cnu-spg.com/</p>
-	<p>홈페이지 Git 주소 : https://github.com/kihwankim/spg</p>
+	<p>홈페이지 URL : <a href="http://www.cnu-spg.com">http://www.cnu-spg.com</a></p>
+	<p>홈페이지 Git 주소 : <a href="https://github.com/kihwankim/spg">https://github.com/kihwankim/spg</a></p>
 </figure>
