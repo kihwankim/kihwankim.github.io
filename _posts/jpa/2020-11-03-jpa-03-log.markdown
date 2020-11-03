@@ -1,0 +1,106 @@
+---
+layout: post
+title: "JPA 공부 003회차"
+date: 2020-11-03
+categories:
+  - "JPA"
+description:
+image: "../../../../../side/img/jpa/jpa.png"
+image-sm: "../../../../../side/img/jpa/jpa.png"
+---
+<h2>Persistence Context(영속성 컨텍스트)</h2>
+<figure>
+	<h3>영속성 컨텍스트</h3>
+    <ul>
+        <li>영속성 정의 : 엔티티 객체를 영구 저장하는 환경이다.</li>
+        <li>영속성 컨텍스트 정의 : Entity 객체의 DB에 영구히 저장하기전에 라이플 사이클을 관리해 주는 하나의 Context</li>
+        <li>persist() 메소드 : Entity Manger를 사용해서 정보를 Entity를 영속성 Context에 저장한다.</li>
+        <li>생성 : Entity Manger가 생성될 때 하나 생성됨</li>
+	</ul>
+	<br/>
+	<br/>
+	<h3>Entity의 4가지 상태와 생명 주기</h3>
+    <img src="../../../../../side/img/jpa/03/03-eneity-life-cycle.jpg" alt="entity object life cycle" style="width: 80%"/>
+    <ul>
+        <li>비영속 : 영속성 컨텍스트와 전혀 관계가 없는 상태, Entity 객체를 생성하였지만 아직 persist() 메서드를 호출하지 않아 DB와 관계없는 상태를 말한다</li> 
+        <li>영속 : 영속성 컨텍스트에 저장된 상태 -> 영속상태의 객체를 find하면 JPQL에 의해 sql이 생성되지 않고 1차 캐시에 있는 값을 가져온다</li>
+        <li>준영속 : 영속성 컨텍스트에 저장되었다가 분리된 상태 -> 영속상였던 Entity 객체가 영속성 컨텍스트가 더이상 관리하지 않게 되면 준영속으로 변경됨 -> clear(), detach()</li>
+        <li>삭제 : 삭제된 상태</li>
+    </ul>
+    <br/>
+    <h3>영속성 컨텍스트의 특징</h3>
+    <ul>
+        <li>식별자 값이 존재해야함 -> 영속상태는 구분하기 위해서 식별자 값이 무조건 존재해야한다.</li>
+        <li>엔티티를 관리하므로 5개의 장점이 존재
+            <ul>
+                <li>1차 캐시</li>
+                <li>동일성 보장</li>
+                <li>트랜젝션을 지원하는 쓰기 지연</li>
+                <li>변경 감지</li>
+                <li>지연 로딩</li>
+            </ul>
+        </li>
+        <li>Entity 조회
+            <ul>
+                <li>내부 캐시인 1차 캐시를 가지고 있음 -> 내부 Map에서 @Id로 되어있는 값에 대해 key를 가지고 value로 해당 객체를 가진다.</li>
+                <li>1차 캐시 조회 : em.find()함수 호출 -> map에 검색 ->(없을 경우) DB조회 -> 반환 된 값 1차 캐시에 저장 -> 사용자에게 반환</li>
+                <li>영속 엔티티의 동일성 보장 -> 캐시로 인해 재 조회시 동이한 객체를 반환 -> 성능상 이점(DB접근 횟수 줄어듦), 엔티티 동이성을 보장</li>
+                <li>동일성(identity) : 같은 객체</li>
+                <li>동등성(equality) : 동일한 값을 가진 다른 객체</li>
+                <li>쓰기 지연 : 같은 트랜젝션 내부에 insert 하는 것들을 모아두고 최종 결과 값을 반영 한다.</li>
+            </ul>
+        </li>
+        <li>Entity 객체 수정
+            <img src="../../../../../side/img/jpa/03/03-jpa-persistent-change.png" alt="엔티티 변경 감지" style="width: 80%"/>
+            <ul>
+                <li>SQL 수정 쿼리의 문제점 -> 수정이 일어날 때 마다 SQL의 어떤 부분이 수정 되었는지 계속확인 해야함</li>
+                <li>위의 문제 해결 방법 : Dirty Check(변경 감지)</li>
+                <li>영속성 컨텍스트는 처음에 Entity 객체를 삽입할 때는 하나의 원본을 복사해놓는다.(snapshot)</li>
+                <li>만약 최종 commit시 flush() 메서드 호출 -> 내부에서 스냅샷과 다르면 그 부분만 update 하는 쿼리 생성한다.(update 함수가 따롱 없기 때문에 변경 감지를 해야함)</li>
+                <li>JPA에서는 무조건 update 함수가 발생할 때 모든 column을 다 써준다.</li>
+                <li>장점 : 
+                    <ul>
+                        <li>수정 쿼리는 항상 같다.</li>
+                        <li>Entity 객체 find로 로드시 update query를 미리 생성 가능</li>
+                        <li>DB차원에서 이미사용한 쿼리를 재용할 수 있다.</li>
+                    </ul>
+                </li>
+                <li>단점 : query생성 할 때 많은 데이터를 보내는 오버헤드 발생 -> 너무 커지면 hibernate에 있는
+                 DynamicUpdate 함수 호출 가능(나중에 DB교체시 수정에 어려움이 생길 수 있음)</li>
+            </ul>
+        </li>
+        <li>Entity 객체 삭제 : flush() 함수 호출 시 삭제된 것을 query를 만들어줌 -> 그전에 영속성 컨텍스트 에서만 사라짐</li>
+        <li>Flush : 영속성 컨택스트 값을 DB에 반영
+            <ul>
+                <li>Snapshot과 비교하여 변경된 값을 찾는다 update query 생성</li>
+                <li>영속성 컨택스트를 flush 하는 방법 3가지
+                    <ul>
+                        <li>em.flush()를 직접 호출 : 강제로 사용하는 경우 -> 이것을 호출할 일은 거의 없음</li>
+                        <li>트랜젝션 커밋 시 플러시가 자동으로 호출 -> commit이 있을 경우 flush 호출</li>
+                        <li>JPQL 쿼리 실행 시 플러시가 자동으로 호출 -> Criteria(나중에 설명함)같은 객체지향 쿼리를 호출할 때 flush 호출 됨(추 후에 공부 필요함)</li>
+                    </ul>
+                </li>
+                <li>JPQL을 실행할 때도 플러시가 실행된다 -> 이전에 1차 캐시에 저장하고 flush 하지않은 Entity객체가 존재할 경우 DB에 반영되어 있지 않는다 
+                -> JPQL의 값이 다르게 나올 수 있으므로 JPQL 실행 전 flush 실행</li>
+            </ul>
+        </li>
+        <li>준영속
+            <ul>
+                <li>엔티티는 영속성 컨텍스트가 제공하는 기능을 사용할 수 없다.</li>
+                <li>em.detach(entity) : 특정 Entity만 준영속 상태로 전환 -> 해당 entity는 영속성 컨텍스트가 관리 하지 말라고 언급해 놓은 것 
+                -> 1차 캐시 제거, snapshot 제거 등이 일어남</li>
+                <li>em.clear() : 영속성 컨텍스트 완전히 초기화 해주는 것</li>
+                <li>em.close() : 영속성 컨텍스트 종료 하는 것</li>
+                <li>특징 
+                    <ul>
+                        <li>비영속성 상태에 가깝다</li>
+                        <li>식별자 값을 가지고 있다</li>
+                        <li>지연 로딩을 할 수 없다.</li>
+                    </ul>
+                </li>
+                <li>merge() : 준영속 상태를 다시 영속성 상태로 변환 해주는 것을 말한다. -> 새로운 영속성 상태의 객체를 반환 해줌</li>
+                <li>비영속 병합 : 비영속 상태의 객체를 영속성 있는 객체로 변환 하는 것</li>
+            </ul>
+        </li>
+    </ul>
+</figure>
