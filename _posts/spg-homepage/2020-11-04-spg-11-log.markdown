@@ -1,0 +1,45 @@
+---
+layout: post
+title: "spg 회고록 011회차"
+date: 2020-11-04
+categories:
+  - "SPG-hompage"
+description:
+image: "../../../../../side/img/spg/spg_logo.jpg"
+image-sm: "../../../../../side/img/spg/spg_logo.jpg"
+---
+<h2>REST api</h2>
+<figure>
+    <h3>REST(REpresentational State Transfer</h3>
+	<ul>
+	    <li>정의 : 자원을 이름(표현)으로 구분하여 해당 자원의 상태(정보)를 주고 받는(통신) 모든 것을 의미한다.</li>
+	    <li>REST 아키텍쳐의 제약 조건
+	        <ul>
+	            <li>Client - Server 구조</li>
+	            <li>Stateless : Client의 Context를 서버에 저장하지 않는다.</li>
+	            <li>Cache : 브라우저 캐싱 기능을 제공함</li>
+	            <li>Uniform Interface : URI로 지정한 자원에 대한 조작을 통일되고 한정적인 인터페이스로 수행한다. -> HTTP 표준에만 따른다면 모든 플랫폼에 사용 가능하다.
+	                <ul>
+	                    <li>URI로 식별 가능</li>
+	                    <li>자원을 조작할 때 해당 -> method를 통해 조작(POST, GET, PATCH, DELETE, PUT)</li>
+	                    <li>메시지가 스스로 설명 가능 -> packet만 보고 어디에서 왔고 어턴 타입인지 알아볼 수 있어야함 (IANA에서 설정함)</li>
+	                    <li>application 상태가 hyperlink를 통해서 전의 되야 한다. -> 페이지네이트 또한 uri에 정보를 포함하고 있어야함(대부분 안지키는 경우가 많음)</li>
+	                </ul>
+	            </li>
+	            <li>Layered System : API서버는 순수 비즈니스 로직을 수행하고, 그 앞단에 사용자 인증, 암호화, 로드 밸런싱 등을 하는 계층을 추가 해야한다.(https에서 ssl 계층과 같은 것)</li>
+	            <li>Code-on-Demand : 주로 안하는 경우도 많음 // 추가 조사 필요</li>
+	        </ul>
+	    </li>
+	</ul>            
+<!--	<img src="../../../../../side/img/spg/10/10-entity-lifecycle.png" alt="jpa life cycle" style="width: 90%"/> -->
+    <h3>반성 과 삽질</h3>
+    <ul>
+        <li>반성
+            <ul>
+                <li>Rest API형태는 아니지만 함수를 개무시했다는 생각이 든다.</li>
+                <li>페이지 네이트 할 때 URI에 해당 정보를 넣지 않음</li>
+                <li>URI정보는 모두 명사형태로 진행해야하지만 동사 형태로 진행한 경우도 많음</li>
+            </ul>
+        </li>
+    </ul>
+</figure>
