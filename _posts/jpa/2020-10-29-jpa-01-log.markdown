@@ -39,7 +39,7 @@ image-sm: "../../../../../side/img/jpa/jpa.png"
     <h3>JPA란?</h3>
     <ul>
         <li>ORM : 객체를 관계형 데이터 베이스에 mapping 시키는 기술 -> 객체와 테이블 매핑 패러다임의 불일치 문제를 해결해준다.</li>
-        <img src="../../../../../side/img/jpa/01/01-jpa조회.png" alt="bug" style="width: 60%"/>
+        <img src="../../../../../side/img/jpa/01/01-jpa조회.png" alt="bug" style="width: 80%"/>
         <li>개발자는 ORM에게 어떻게 mapping시킬지를 알려주기만 하면된다.</li>
         <li>내부 ORM 프레임 워크 가여러개 있는데 주로 Hibernate가 주로 사용된다.(그외에 EclipseLink, DataNucleus가 있다.)</li>
         <li>JPA는 ORM 기술에 대한 API표준 명세다.</li>
